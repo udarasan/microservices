@@ -1,9 +1,7 @@
 package com.example.emplayeeservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -19,5 +17,10 @@ public class EmployeeController {
     @GetMapping("/save")
     public String saveEmployee(){
        return restTemplate.getForObject("http://user-service/user/save",String.class);
+    }
+
+    @PostMapping("/add")
+    public User addUserFromEmployeeEndpoint(@RequestBody User user){
+        return restTemplate.postForObject("http://user-service/user/add",user,User.class);
     }
 }
